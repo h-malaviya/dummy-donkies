@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+
+$neon-cobalt: #00f2ff;    // Liquid cooling / Laser precision
+$palladium: #d4d4d8;      // Polished metal
+$deep-electric: #0062ff;  // Data flow blue
+$circuit-gold: #e2b857;   // High-conductivity trace gold
+
+$dark-obsidian: #050608;  // Pure darkness
+$dark-titanium: #0d0f12;  // Brushed metal surface
+$dark-alloy: #16191d;     // Structural component
+
+$light-cleanroom: #ffffff;
+$light-sterile: #f8fafc;  
+$light-quartz: #f1f5f9;
+
+:root {
+    // Fonts
+    --font-main: 'Inter', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+
+    // Backgrounds - Using obsidian tones
+    --bg-1: #{$dark-obsidian}; 
+    --bg-2: #{$dark-titanium};
+    --bg-3: #{$dark-alloy};
+
+    // Typography - Ultra high contrast
+    --text-1: #ffffff;
+    --text-2: #94a3b8; // Muted slate
+    --text-3: #475569; // Dimmed hardware gray
+
+    // Navigation - Blurred Glass Effect
+    --nav-bg: rgba(5, 6, 8, 0.8);
+    --nav-text: #94a3b8;
+    --nav-hover: #{$neon-cobalt};
+    --nav-active: #{$neon-cobalt};
+
+    // Buttons - "Neon glow" style
+    --button-bg-1: #{$neon-cobalt};
+    --button-bg-2: rgba(255, 255, 255, 0.05);
+    --button-text-1: #050608;
+    --button-text-2: #ffffff;
+    --button-text-3: #{$neon-cobalt};
+
+    // Brand & Accents
+    --primary: #{$neon-cobalt};
+    --accent: #{$circuit-gold};
+    
+    // Luxury Gradients (Complex stops for metallic look)
+    --hero-gradient: linear-gradient(165deg, #ffffff 0%, #94a3b8 40%, #{$deep-electric} 100%);
+    --card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 20px 50px rgba(0, 0, 0, 0.6);
+    --glass: blur(12px) saturate(180%) rgba(13, 15, 18, 0.7);
+}
+
+:root.light {
+    // Backgrounds - Clinical Sterile
+    --bg-1: #{$light-cleanroom};
+    --bg-2: #{$light-sterile};
+    --bg-3: #{$light-quartz};
+
+    // Typography - Depth-focused
+    --text-1: #0f172a;
+    --text-2: #475569;
+    --text-3: #94a3b8;
+
+    // Navigation
+    --nav-bg: rgba(255, 255, 255, 0.8);
+    --nav-text: #475569;
+    --nav-hover: #{$deep-electric};
+    --nav-active: #{$deep-electric};
+
+    // Buttons
+    --button-bg-1: #0f172a;
+    --button-bg-2: #f1f5f9;
+    --button-text-1: #ffffff;
+    --button-text-2: #0f172a;
+    --button-text-3: #{$deep-electric};
+
+    // Brand & Accents
+    --primary: #{$deep-electric};
+    --accent: #{$deep-electric};
+    
+    --hero-gradient: linear-gradient(135deg, #0f172a 0%, #{$deep-electric} 100%);
+    --card-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 40px rgba(0, 0, 0, 0.05);
+    --glass: blur(12px) saturate(180%) rgba(255, 255, 255, 0.7);
+}
+
+body {
+    background-color: var(--bg-3);
+    color: var(--text-1);
+}
