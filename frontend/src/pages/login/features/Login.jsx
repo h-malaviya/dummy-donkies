@@ -14,8 +14,8 @@ export default function Login() {
                 </h2>
                 <p>Login to continue</p>
                 
-                    <Input type="email" label="Email" />
-                    <Input type="password" label="Password" />
+                    <Input type="email" label="Email" placeholder="Email"/>
+                    <Input type="password" label="Password" placeholder="Password"/>
                 
 
                 <div className="role-select">
@@ -37,7 +37,7 @@ export default function Login() {
                     </label>
                 </div>
 
-                <Button onclick={()=>navigateTo('/home')}>Login</Button>
+                <Button onclick={()=>navigateTo('/home')}>Home</Button>
 
                 <p className="switch">
                     Don’t have an account? <span onClick={()=>navigateTo('/signup')}>Sign up</span>

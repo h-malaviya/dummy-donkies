@@ -1,0 +1,19 @@
+@use '../../styles/theme' as *;
+
+
+.nav-item{
+    padding: 1rem;
+    
+    text-decoration: none;
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    &:hover{
+        color: var(--nav-hover);
+    }
+    &.active {
+        color: var(--nav-active);
+        border-bottom: 2px solid var(--nav-active);
+        border-radius: 6px;
+    }
+   
+}
