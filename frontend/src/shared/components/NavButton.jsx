@@ -1,8 +1,8 @@
 import React from 'react'
 import '../styles/navButton.scss'
 import { NavLink } from 'react-router-dom'
-
-function NavButton({ text = "Home", url = "/" }) {
+import { ROUTES } from '../../app/appConfig'
+function NavButton({ text = "Home", url = ROUTES.HOME}) {
 
   return (
     <>

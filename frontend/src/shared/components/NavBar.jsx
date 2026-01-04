@@ -7,7 +7,7 @@ import cart_icon from '../../assets/icons/cart.png'
 import profile from '../../assets/icons/profile.png'
 import { useState } from 'react'
 import { ROUTES } from '../../app/appConfig'
-
+import { getClassNames } from '../utils/global'
 function NavBar() {
   const navLinks = [
     {
@@ -25,7 +25,7 @@ function NavBar() {
       <nav className="navbar">
         <div className="company-title">
           <button
-            className={`menu-btn ${isMenuOpen ? "open" : ""}`}
+            className={`menu-btn ${getClassNames(isMenuOpen,"open","","")}`}
             onClick={()=>setIsMenuOpen(true)}
             aria-label="toggle menu"
           >
@@ -64,11 +64,10 @@ function NavBar() {
       </nav>
 
       <div
-        className={`overlay ${isMenuOpen ? "show" : ""
-          }`}
+        className={`overlay ${getClassNames(isMenuOpen,"show","","")}`}
         onClick={()=>setIsMenuOpen(true)}
       />
-      <aside className={`sidebar ${isMenuOpen ? "open" : ""}`}>
+      <aside className={`sidebar ${getClassNames(isMenuOpen , "open" , "","")}`}>
         <button className="close-btn" onClick={()=>setIsMenuOpen(false)}>
           ✕
         </button>

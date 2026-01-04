@@ -11,13 +11,13 @@ function App() {
 
   return (
     <ThemeProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path={ROUTES.LOGIN} element={<Login/>}/>
-        <Route path={ROUTES.SIGNUP} element={<Signup/>}/>
-        <Route path={ROUTES.HOME} element={<Home/>}/>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route path={ROUTES.SIGNUP} element={<Signup />} />
+          <Route path={ROUTES.HOME} element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   )
 }

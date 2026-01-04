@@ -3,6 +3,7 @@ import Input from "../../../shared/components/Input";
 import Button from "../../../shared/components/Button";
 import "./login.scss";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../app/appConfig";
 export default function Login() {
     const [role, setRole] = useState("user");
     const navigateTo = useNavigate()
@@ -13,10 +14,10 @@ export default function Login() {
                     Welcome to <span>Dummy Donkies</span>
                 </h2>
                 <p>Login to continue</p>
-                
-                    <Input type="email" label="Email" placeholder="Email"/>
-                    <Input type="password" label="Password" placeholder="Password"/>
-                
+
+                <Input type="email" label="Email" placeholder="Email" />
+                <Input type="password" label="Password" placeholder="Password" />
+
 
                 <div className="role-select">
                     <label>
@@ -37,10 +38,10 @@ export default function Login() {
                     </label>
                 </div>
 
-                <Button onclick={()=>navigateTo('/home')}>Home</Button>
+                <Button onclick={() => navigateTo(ROUTES.HOME)}>Home</Button>
 
                 <p className="switch">
-                    Don’t have an account? <span onClick={()=>navigateTo('/signup')}>Sign up</span>
+                    Don’t have an account? <span onClick={() => navigateTo(ROUTES.SIGNUP)}>Sign up</span>
                 </p>
             </div>
         </div>
