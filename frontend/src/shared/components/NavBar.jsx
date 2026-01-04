@@ -6,9 +6,10 @@ import '../styles/navBar.scss'
 import logo from '../../assets/icons/logo1.png'
 import cart_icon from '../../assets/icons/cart.png'
 import profile from '../../assets/icons/profile.png'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { ROUTES } from '../../app/appConfig'
 import { getClassNames } from '../utils/global'
+import ProfilePopup from '../../pages/home/features/ProfilePopup'
 const cartData = {
   id: 101,
   userId: 1,
@@ -85,7 +86,28 @@ export const products = [
     rating: { rate: 4.6, count: 400 }
   }
 ];
-
+const userData = {
+    "address": {
+        "geolocation": {
+            "lat": "-37.3159",
+            "long": "81.1496"
+        },
+        "city": "kilcoole",
+        "street": "new road",
+        "number": 7682,
+        "zipcode": "12926-3874"
+    },
+    "id": 1,
+    "email": "john@gmail.com",
+    "username": "johnd",
+    "password": "m38rmF$",
+    "name": {
+        "firstname": "john",
+        "lastname": "doe"
+    },
+    "phone": "1-570-236-7033",
+    "__v": 0
+}
 
 function NavBar() {
   const navLinks = [
@@ -102,6 +124,11 @@ function NavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [cart, setCart] = useState(cartData);
+  const [user, setUser] = useState(userData);
+
+  const updateUser = (updated) => {
+    setUser(prev => ({ ...prev, ...updated }));
+  };
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
@@ -170,7 +197,7 @@ function NavBar() {
       <nav className="navbar">
         <div className="company-title">
           <button
-            className={`menu-btn ${getClassNames(isMenuOpen,"open","","")}`}
+            className={`menu-btn ${getClassNames(isMenuOpen, "open", "", "")}`}
             onClick={openMenu}
             aria-label="toggle menu"
           >
@@ -209,10 +236,10 @@ function NavBar() {
       </nav>
 
       <div
-        className={`overlay ${getClassNames(isMenuOpen || isCartOpen || isProfileOpen , "show" , "")}`}
+        className={`overlay ${getClassNames(isMenuOpen || isCartOpen || isProfileOpen, "show", "")}`}
         onClick={closeAll}
       />
-      <aside className={`sidebar ${getClassNames(isMenuOpen, "open" , "")}`}>
+      <aside className={`sidebar ${getClassNames(isMenuOpen, "open", "")}`}>
         <button className="close-btn" onClick={closeAll}>
           ✕
         </button>
@@ -237,6 +264,15 @@ function NavBar() {
         onDecrease={decreaseQty}
         onRemove={removeItem}
       />}
+      {isProfileOpen && (
+        <ProfilePopup
+          isOpen={isProfileOpen}
+          onClose={closeAll}
+          user={user}
+          onUpdate={updateUser}
+        />
+      )}
+
     </>
   )
 }
