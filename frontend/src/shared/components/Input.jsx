@@ -1,11 +1,11 @@
 import "../styles/input.scss";
 
-export default function Input({ type, label, value, onChange }) {
+export default function Input({ type, label, value, onChange,placeholder }) {
   return (
     <div className="floating-label">
       <input
         type={type}
-        placeholder=" "
+        placeholder={placeholder}
         value={value}
         onChange={onChange}
         required
