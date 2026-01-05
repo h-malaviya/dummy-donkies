@@ -1,6 +1,6 @@
 import Input from "../../../shared/components/Input";
 import Button from "../../../shared/components/Button";
-import "../../login/pages/login.scss";
+import "../../login/features/login.scss";
 import { useNavigate } from "react-router-dom";
 export default function Signup() {
     const navigateTo = useNavigate()
@@ -12,9 +12,9 @@ export default function Signup() {
         </h2>
         <p>Create Account</p>
 
-        <Input type="text" label="Full Name" />
-        <Input type="email" label="Email" />
-        <Input type="password" label="Password" />
+        <Input type="text" label="Username" placeholder="Username"/>
+        <Input type="email" label="Email" placeholder="Email"/>
+        <Input type="password" label="Password" placeholder="Password"/>
 
         <Button>Sign Up</Button>
 

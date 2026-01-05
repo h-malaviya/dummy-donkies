@@ -1,18 +1,22 @@
-import { useState } from 'react'
 import '../styles/global.scss'
-import Login from '../features/login/pages/Login'
-import Signup from '../features/signup/pages/Signup'
+import Login from '../pages/login/features/Login'
+import Signup from '../pages/signup/features/Signup'
+import Home from '../pages/home/features/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ThemeProvider } from './ThemeContext'
+import { ROUTES } from './appConfig'
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Login/>}/>
-        <Route path='/signup' element={<Signup/>}/>
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route path={ROUTES.SIGNUP} element={<Signup />} />
+          <Route path={ROUTES.HOME} element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 
