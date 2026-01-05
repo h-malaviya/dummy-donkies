@@ -1,10 +1,6 @@
 @use "../../styles/theme.scss" as *;
 
-@mixin mobile {
-  @media (max-width: 768px) {
-    @content;
-  }
-}
+
 
 .navbar {
   display: flex;
@@ -69,7 +65,7 @@
     }
   }
 
-  @include mobile {
+  @media (max-width: 480px) {
     .nav-links {
       display: none;
     }
