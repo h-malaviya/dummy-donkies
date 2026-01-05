@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react'
 import { ROUTES } from '../../app/appConfig'
 import { getClassNames } from '../utils/global'
 import ProfilePopup from '../../pages/home/features/ProfilePopup'
+import SearchBar from './SearchBar'
 const cartData = {
   id: 101,
   userId: 1,
@@ -87,26 +88,26 @@ export const products = [
   }
 ];
 const userData = {
-    "address": {
-        "geolocation": {
-            "lat": "-37.3159",
-            "long": "81.1496"
-        },
-        "city": "kilcoole",
-        "street": "new road",
-        "number": 7682,
-        "zipcode": "12926-3874"
+  "address": {
+    "geolocation": {
+      "lat": "-37.3159",
+      "long": "81.1496"
     },
-    "id": 1,
-    "email": "john@gmail.com",
-    "username": "johnd",
-    "password": "m38rmF$",
-    "name": {
-        "firstname": "john",
-        "lastname": "doe"
-    },
-    "phone": "1-570-236-7033",
-    "__v": 0
+    "city": "kilcoole",
+    "street": "new road",
+    "number": 7682,
+    "zipcode": "12926-3874"
+  },
+  "id": 1,
+  "email": "john@gmail.com",
+  "username": "johnd",
+  "password": "m38rmF$",
+  "name": {
+    "firstname": "john",
+    "lastname": "doe"
+  },
+  "phone": "1-570-236-7033",
+  "__v": 0
 }
 
 function NavBar() {
@@ -211,12 +212,13 @@ function NavBar() {
           <h4 >Dummy Donkies</h4>
         </div>
 
-        <div className="nav-links">
+        {!isMenuOpen && <div className="nav-links">
           {navLinks.map((i, idx) => (
             <NavButton key={idx} text={i.text} url={i.url} />
           ))}
-        </div>
-
+          <ThemeButton className="theme-switch" />
+        </div>}
+        <SearchBar onSearch={(q) => console.log("Search:", q)} />
         <div className="logos">
           <img
             src={cart_icon}
@@ -234,8 +236,6 @@ function NavBar() {
             
           />
         </div>
-
-        <ThemeButton />
       </nav>
 
       <div
@@ -248,7 +248,8 @@ function NavBar() {
           ✕
         </button>
 
-        <div className="sidebar-links">
+        {isMenuOpen && <div className="sidebar-links">
+
           {navLinks.map((i, idx) => (
             <NavButton
               key={idx}
@@ -258,7 +259,8 @@ function NavBar() {
             
             />
           ))}
-        </div>
+          <ThemeButton />
+        </div>}
       </aside>
       {isCartOpen && <CartPopup
         isOpen={isCartOpen}

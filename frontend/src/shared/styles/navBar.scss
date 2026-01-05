@@ -10,7 +10,7 @@
   background: var(--bg-2);
   z-index: 1000;
   top: 0;
- 
+
   .company-title {
     display: flex;
     align-items: center;
@@ -21,16 +21,21 @@
     height: 36px;
   }
 
-  
-
   .nav-links {
     display: flex;
+    justify-content: baseline;
     gap: 1.5rem;
+    .theme-switch{
+      
+      margin-top: 3rem;
+    }
   }
-  .logos{
-    display:flex;
+
+  .logos {
+    display: flex;
     gap: 1rem;
   }
+
   /* HAMBURGER */
   .menu-btn {
     display: none;
@@ -39,7 +44,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    
+
     flex-direction: column;
     justify-content: center;
     gap: 6px;
@@ -72,10 +77,14 @@
 
     .menu-btn {
       display: flex;
-      
+
     }
 
-    
+    .search-bar {
+      order: 3;
+      margin-top: 10px;
+    }
+
   }
 }
 
@@ -108,7 +117,7 @@
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 999;
   padding: 1.5rem;
-  
+
   &.open {
     transform: translateX(0);
   }
