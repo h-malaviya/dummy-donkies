@@ -36,7 +36,10 @@
         width: 26px;
         height: 26px;
         border-radius: 6px;
+        border: none;
+        cursor: pointer;
         background: var(--bg-1);
+        color: var(--text-1);
         font-weight: 600;
       }
     }

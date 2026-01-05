@@ -7,8 +7,11 @@ import logo from '../../assets/icons/logo1.png'
 import cart_icon from '../../assets/icons/cart.png'
 import profile from '../../assets/icons/profile.png'
 import { useState,useEffect } from 'react'
+
 import { ROUTES } from '../../app/appConfig'
 import { getClassNames } from '../utils/global'
+
+
 const cartData = {
   id: 101,
   userId: 1,
@@ -172,6 +175,7 @@ function NavBar() {
           <button
             className={`menu-btn ${getClassNames(isMenuOpen,"open","","")}`}
             onClick={openMenu}
+           
             aria-label="toggle menu"
           >
             <span />
@@ -195,6 +199,7 @@ function NavBar() {
             alt="cart"
             className="company-logo"
             onClick={openCart}
+          
           />
 
           <img
@@ -202,6 +207,7 @@ function NavBar() {
             alt="profile"
             className="company-logo"
             onClick={openProfile}
+            
           />
         </div>
 
@@ -211,7 +217,9 @@ function NavBar() {
       <div
         className={`overlay ${getClassNames(isMenuOpen || isCartOpen || isProfileOpen , "show" , "")}`}
         onClick={closeAll}
+       
       />
+    
       <aside className={`sidebar ${getClassNames(isMenuOpen, "open" , "")}`}>
         <button className="close-btn" onClick={closeAll}>
           ✕
@@ -224,6 +232,7 @@ function NavBar() {
               text={i.text}
               url={i.url}
               onClick={closeAll}
+            
             />
           ))}
         </div>
@@ -237,6 +246,16 @@ function NavBar() {
         onDecrease={decreaseQty}
         onRemove={removeItem}
       />}
+      {isCartOpen && <CartPopup
+        isOpen={isCartOpen}
+        onClose={closeAll}
+        cart={cart}
+        products={products}
+        onIncrease={increaseQty}
+        onDecrease={decreaseQty}
+        onRemove={removeItem}
+      />}
+      
     </>
   )
 }
