@@ -240,7 +240,7 @@ export default function ProductGrid() {
         <button
           className="nav"
           disabled={page === 1}
-          onClick={() => setPage(p => p - 1)}
+          onClick={prev}
         >
           &lt;
         </button>
@@ -262,7 +262,7 @@ export default function ProductGrid() {
         <button
           className="nav"
           disabled={page === totalPages}
-          onClick={() => setPage(p => p + 1)}
+          onClick={next}
         >
           &gt;
         </button>
