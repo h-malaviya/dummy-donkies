@@ -32,7 +32,6 @@ export default function ProfilePopup({ isOpen, onClose, user, onUpdate }) {
 
   return (
     <>
-
       <div className="profile-modal">
         <header className="header">
           <h3>Profile</h3>
