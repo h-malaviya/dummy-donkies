@@ -113,15 +113,15 @@ function NavBar() {
     return () => window.removeEventListener('resize', handleResize);
   }, [])
   const increaseQty = (productId) => {
-    setCart(prev => ({
-      ...prev,
-      products: prev.products.map(p =>
-        p.productId === productId
-          ? { ...p, quantity: p.quantity + 1 }
-          : p
-      )
-    }));
-  };
+  setCart(prev => ({
+    ...prev,
+    products: prev.products.map(p =>
+      p.productId === productId
+        ? { ...p, quantity: Math.min(p.quantity + 1, 10) } 
+        : p
+    )
+  }));
+};
   const decreaseQty = (productId) => {
     setCart(prev => ({
       ...prev,
