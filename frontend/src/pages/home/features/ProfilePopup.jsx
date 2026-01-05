@@ -117,7 +117,7 @@ export default function ProfilePopup({ isOpen, onClose }) {
           </div>
         </div>
 
-        <footer className="footer">
+        <div className="footer">
           {!isEdit ? (
             <button className="edit" onClick={() => setIsEdit(true)}>
               Edit
@@ -132,7 +132,7 @@ export default function ProfilePopup({ isOpen, onClose }) {
               </button>
             </>
           )}
-        </footer>
+        </div>
       </div>
     </>
   );
