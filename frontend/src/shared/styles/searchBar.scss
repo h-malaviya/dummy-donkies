@@ -45,8 +45,7 @@
   }
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
+@include tablet {
   .search-bar {
     width: 100%;
   }

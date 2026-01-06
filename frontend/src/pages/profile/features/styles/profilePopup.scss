@@ -127,8 +127,8 @@
   }
 }
 
-/* ================= MOBILE ================= */
-@media (max-width: 480px) {
+
+@include small {
   .profile-modal {
     width: calc(100% - 24px);
     max-height: calc(100vh - 90px); // extra safe
@@ -172,7 +172,7 @@
 }
 
 /* ================= SMALL TABLETS ================= */
-@media (max-width: 768px) {
+@include tablet{
   .profile-modal {
     max-height: calc(100vh - 100px);
   }
