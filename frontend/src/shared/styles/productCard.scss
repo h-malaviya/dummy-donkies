@@ -1,4 +1,3 @@
-
 .product-grid-section {
   padding: 36px 24px;
   background: var(--bg-1);
@@ -23,6 +22,7 @@
       position: relative;
       cursor: pointer;
       color: var(--text-1);
+      height: 100%;
 
       &:hover {
         transform: translateY(-6px);
@@ -32,11 +32,9 @@
         position: absolute;
         top: 12px;
         right: 12px;
-        background: linear-gradient(
-          90deg,
-          var(--primary),
-          var(--accent)
-        );
+        background: linear-gradient(90deg,
+            var(--primary),
+            var(--accent));
         color: #000;
         padding: 5px 10px;
         font-size: 11px;
@@ -64,6 +62,7 @@
 
       .info {
         padding: 20px;
+        flex: 1;
 
         .cat {
           font-size: 11px;
@@ -78,6 +77,7 @@
           font-size: 18px;
           font-weight: 700;
           margin-bottom: 8px;
+          overflow: hidden;
         }
 
         .desc {
@@ -85,7 +85,9 @@
           color: var(--text-2);
           line-height: 1.4;
           margin-bottom: 12px;
+          overflow: hidden;
         }
+
 
         .feats {
           display: flex;
@@ -121,13 +123,11 @@
           }
 
           .btn {
-            background: linear-gradient(
-              45deg,
-              var(--primary),
-              var(--deep-electric, #0062ff)
-            );
+            background: linear-gradient(45deg,
+                var(--primary),
+                var(--deep-electric, #0062ff));
             color: #000;
-            border: none;
+            
             border-radius: 10px;
             padding: 8px 14px;
             font-size: 13px;
@@ -150,6 +150,40 @@
               transform: rotate(-10deg) scale(1.1);
             }
           }
+
+          .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-3);
+            border-radius: 10px;
+            padding: 6px 10px;
+
+            .qty-btn {
+              width: 28px;
+              height: 28px;
+              border-radius: 6px;
+              font-size: 18px;
+              font-weight: 700;
+              cursor: pointer;
+              background: linear-gradient(45deg,
+                  var(--primary),
+                  var(--deep-electric, #0062ff));
+              color: #000;
+              transition: transform 0.2s;
+
+              &:hover {
+                transform: scale(1.1);
+              }
+            }
+
+            .qty {
+              min-width: 20px;
+              text-align: center;
+              font-weight: 700;
+              font-size: 14px;
+            }
+          }
         }
 
         .meta {
@@ -170,12 +204,26 @@
               color: var(--text-2);
             }
           }
-
           .stock {
             font-size: 11px;
             font-weight: 600;
             color: #22c55e;
           }
+        }
+      }
+
+      .admin-actions {
+        display: flex;
+        bottom: 0;
+        position: sticky;
+
+        button {
+          flex: 1;
+          padding: 8px 10px;
+          border-radius: 10px;
+          background: var(--bg-3);
+          font-weight: 600;
+          transition: all 0.25s ease;
         }
       }
     }
