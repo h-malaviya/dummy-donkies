@@ -1,14 +1,13 @@
 import "../styles/productCard.scss";
-
-export default function ProductCard({ product }) {
+import { isAdmin } from "../../app/appConfig";
+export default function ProductCard({ product,
+  onEdit,
+  onDelete, }) {
   const { title, price, description, category, image, rating } = product;
-
   const stars = Math.round(rating?.rate || 0);
-
+  const isCartItem=false
   return (
     <div className="card">
-      <div className="badge">HOT SALE</div>
-
       <div className="tilt">
         <div className="img">
           <img src={image} alt={title} />
@@ -33,29 +32,53 @@ export default function ProductCard({ product }) {
           <span className="feat">Fast Delivery</span>
           <span className="feat">Warranty</span>
         </div>
-
         <div className="bottom">
           <div className="price">
             <span className="old">${(price * 1.2).toFixed(2)}</span>
             <span className="new">${price.toFixed(2)}</span>
           </div>
 
-          <button className="btn">
-            <span>Add to Cart</span>
-            <svg
-              className="icon"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 01-8 0" />
-            </svg>
-          </button>
+          {!isAdmin && (
+            isCartItem ? (
+              <div className="qty-control">
+                <button
+                  className="qty-btn"
+                 
+                >
+                  −
+                </button>
+
+                <span className="qty">1</span>
+
+                <button
+                  className="qty-btn"
+                  
+                >
+                  +
+                </button>
+              </div>
+            ) : (
+              <button
+                className="btn"
+                
+              >
+                <span>Add to Cart</span>
+                <svg
+                  className="icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 01-8 0" />
+                </svg>
+              </button>
+            )
+          )}
         </div>
 
         <div className="meta">
@@ -77,6 +100,13 @@ export default function ProductCard({ product }) {
           <div className="stock">In Stock</div>
         </div>
       </div>
+      {isAdmin && (
+        <div className="admin-actions">
+          <button onClick={() => onEdit(product)}>Edit</button>
+          <button onClick={() => onDelete(product.id)}>Delete</button>
+        </div>
+      )}
     </div>
+
   );
 }

@@ -1,7 +1,5 @@
-import React from 'react'
 import ThemeButton from './ThemeButton'
 import NavButton from './NavButton'
-import CartPopup from '../../pages/home/features/CartPopup'
 import '../styles/navBar.scss'
 import logo from '../../assets/icons/logo1.png'
 import cart_icon from '../../assets/icons/cart.png'
@@ -9,23 +7,22 @@ import profile from '../../assets/icons/profile.png'
 import { useState, useEffect } from 'react'
 import { ROUTES } from '../../app/appConfig'
 import { getClassNames } from '../utils/global'
-import ProfilePopup from '../../pages/home/features/ProfilePopup'
 import SearchBar from './SearchBar'
+import { isAdmin } from '../../app/appConfig'
+import { useNavigate } from 'react-router-dom'
 
 function NavBar() {
-  const navLinks = [
-    {
-      text: 'Home',
-      url: `${ROUTES.HOME}`,
-    },
-    {
-      text: 'Categories',
-      url: `${ROUTES.CATEGORIES}`
-    }
-  ]
+  const naviageTo = useNavigate()
+  const navLinks = isAdmin
+    ? [
+      { text: "Users", url: ROUTES.ADMIN_USERS },
+      { text: "Products", url: ROUTES.ADMIN_PRODUCTS }
+    ]
+    : [
+      { text: "Home", url: ROUTES.HOME },
+     
+    ];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false)
-  const [isProfileOpen, setIsProfileOpen] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,26 +37,12 @@ function NavBar() {
 
   const openMenu = () => {
     setIsMenuOpen(true);
-    setIsCartOpen(false);
-    setIsProfileOpen(false);
-  };
 
-  const openCart = () => {
-    setIsCartOpen(true);
-    setIsMenuOpen(false);
-    setIsProfileOpen(false);
-  };
-
-  const openProfile = () => {
-    setIsProfileOpen(true);
-    setIsMenuOpen(false);
-    setIsCartOpen(false);
   };
 
   const closeAll = () => {
     setIsMenuOpen(false);
-    setIsCartOpen(false);
-    setIsProfileOpen(false);
+
   };
 
   return (
@@ -67,7 +50,7 @@ function NavBar() {
       <nav className="navbar">
         <div className="company-title">
           <button
-            className={`menu-btn ${getClassNames(isMenuOpen, "open", "", "")}`}
+            className={`menu-btn ${getClassNames(isMenuOpen, "open")}`}
             onClick={openMenu}
 
             aria-label="toggle menu"
@@ -77,8 +60,8 @@ function NavBar() {
             <span />
           </button>
 
-          <img src={logo} alt="Logo" className="company-logo" />
-          <h4 >Dummy Donkies</h4>
+          <img src={logo} alt="Logo" className="company-logo" onClick={() => naviageTo(isAdmin ? ROUTES.ADMIN : ROUTES.HOME)} />
+          <h4 className='company-title' onClick={() => naviageTo(isAdmin ? ROUTES.ADMIN : ROUTES.HOME)}>Dummy Donkies</h4>
         </div>
 
         {!isMenuOpen && <div className="nav-links">
@@ -92,30 +75,29 @@ function NavBar() {
         </div>
 
         <div className="logos">
-          <img
+          {!isAdmin && <img
             src={cart_icon}
-            alt="cart"
+            alt="cart-icon"
             className="company-logo"
-            onClick={openCart}
-
-          />
+            onClick={() => naviageTo(ROUTES.CART)}
+          />}
 
           <img
             src={profile}
-            alt="profile"
+            alt="profile-icon"
             className="company-logo"
-            onClick={openProfile}
+            onClick={() => naviageTo(ROUTES.PROFILE)}
 
           />
         </div>
       </nav>
 
       <div
-        className={`overlay ${getClassNames(isMenuOpen || isCartOpen || isProfileOpen, "show", "")}`}
+        className={`overlay ${getClassNames(isMenuOpen, "show")}`}
         onClick={closeAll}
 
       />
-      <aside className={`sidebar ${getClassNames(isMenuOpen, "open", "")}`}>
+      <aside className={`sidebar ${getClassNames(isMenuOpen, "open")}`}>
         <button className="close-btn" onClick={closeAll}>
           ✕
         </button>
@@ -134,19 +116,7 @@ function NavBar() {
           <ThemeButton />
         </div>}
       </aside>
-      {isCartOpen && <CartPopup
-        isOpen={isCartOpen}
-        onClose={closeAll}
 
-
-      />}
-      {isProfileOpen && (
-        <ProfilePopup
-          isOpen={isProfileOpen}
-          onClose={closeAll}
-
-        />
-      )}
 
     </>
   )

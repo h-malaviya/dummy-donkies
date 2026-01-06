@@ -1,0 +1,173 @@
+@use "../../../../styles/theme.scss" as *;
+
+.admin-users-page {
+  padding:  24px 32px; 
+  background: var(--bg-3);
+  min-height: 100vh;
+
+  h2 {
+    margin-bottom: 20px;
+    
+    font-weight: 700;
+  }
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 998;
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+
+  thead {
+    th {
+      text-align: left;
+      
+      font-weight: 600;
+      color: var(--text-2);
+      padding: 12px 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  tbody {
+    tr {
+      background: var(--bg-2);
+      border-radius: 14px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+
+      td {
+        padding: 14px 16px;
+        font-size: 14px;
+        color: var(--text-1);
+        vertical-align: middle;
+
+        &:first-child {
+          border-radius: 14px 0 0 14px;
+        }
+
+        &:last-child {
+          border-radius: 0 14px 14px 0;
+          text-align: right;
+          white-space: nowrap;
+        }
+
+        small {
+          display: block;
+          font-size: 12px;
+          color: var(--text-2);
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+}
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+
+  button {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+  }
+
+  .edit {
+    background: var(--button-bg-2);
+    color: var(--button-text-2);
+
+    &:hover {
+      background: var(--bg-3);
+    }
+  }
+
+  .delete {
+    background: transparent;
+    color: var(--delete-text);
+
+    &:hover {
+      background: rgba(239, 68, 68, 0.15);
+    }
+  }
+}
+.admin-empty {
+  text-align: center;
+  padding: 80px 0;
+  color: var(--text-2);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .admin-users-page {
+    padding: 88px 16px 24px;
+  }
+
+  .admin-table {
+    border-spacing: 0 16px;
+
+    thead {
+      display: none;
+    }
+
+    tbody tr {
+      display: block;
+      background: var(--bg-2);
+      padding: 16px;
+      border-radius: 14px;
+      box-shadow: var(--card-shadow);
+    }
+
+    tbody td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 14px;
+      border-radius: 0;
+
+      &::before {
+        content: attr(data-label);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-2);
+      }
+    }
+
+    tbody td:last-child {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--bg-3);
+    }
+  }
+
+  .admin-actions {
+    width: 100%;
+    justify-content: flex-end;
+
+    button {
+      flex: 1;
+    }
+  }
+}
