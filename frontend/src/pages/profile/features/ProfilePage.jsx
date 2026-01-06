@@ -58,15 +58,9 @@ export default function ProfilePage() {
         const ok = window.confirm(
             `Are you sure you want to delete ${u.username}? This action cannot be undone.`
         );
-
         if (ok) {
-            deleteUser(u.id);
+            navigate(ROUTES.LOGIN, { replace: true });
         }
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        sessionStorage.clear();
-
-        navigate(ROUTES.LOGIN, { replace: true });
     };
     return (
         <>

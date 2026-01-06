@@ -3,7 +3,7 @@
 .profile-page {
   min-height: calc(100vh - 72px); // navbar safe area
   background: var(--bg-1);
- 
+
   overflow: hidden;
 }
 
@@ -36,9 +36,7 @@
   button {
     padding: 10px 16px;
     border-radius: 10px;
-    border: none;
     font-weight: 600;
-    cursor: pointer;
     white-space: nowrap;
   }
 
@@ -56,16 +54,16 @@
     background: transparent;
     color: var(--text-2);
   }
-  .logout {
-  background: var(--bg-1); // red-600
-  color: white;
 
-  &:hover {
-    background: #b91c1c;
+  .logout {
+    background: var(--bg-1); // red-600
+    color: white;
+
+    &:hover {
+      background: #b91c1c;
+    }
   }
 }
-}
-
 
 .profile-grid {
   display: grid;
