@@ -121,7 +121,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@include tablet {
   .profile-page {
     padding: 1.75rem 1.25rem;
   }
