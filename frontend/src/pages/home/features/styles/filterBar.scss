@@ -48,7 +48,7 @@ select {
 }
 
 /* Tablet */
-@media (max-width: 768px) {
+@include tablet {
   .filter-container {
     gap: 10px;
   }
@@ -59,7 +59,7 @@ select {
 }
 
 /* Mobile */
-@media (max-width: 480px) {
+@include small {
   .filter-container {
     flex-wrap: nowrap;
     overflow-x: auto;
