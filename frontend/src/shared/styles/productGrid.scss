@@ -45,7 +45,7 @@
 }
 
 /* Mobile */
-@media (max-width: 480px) {
+@include small {
   .pagination {
     gap: 6px;
 

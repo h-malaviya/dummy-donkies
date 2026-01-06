@@ -23,16 +23,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
       h3 {
         margin: 0;
       }
 
       button {
-    
+
         color: var(--text-2);
-        
+
       }
     }
 
@@ -81,7 +81,7 @@
 }
 
 /* Mobile */
-@media (max-width: 480px) {
+@include small {
   .admin-edit-modal .modal {
     width: calc(100% - 24px);
   }

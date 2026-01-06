@@ -119,7 +119,7 @@
   font-size: 14px;
 }
 
-@media (max-width: 768px) {
+@include tablet {
   .admin-users-page {
     padding: 88px 16px 24px;
   }
