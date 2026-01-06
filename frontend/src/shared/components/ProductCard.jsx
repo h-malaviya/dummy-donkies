@@ -2,10 +2,10 @@ import "../styles/productCard.scss";
 import { isAdmin } from "../../app/appConfig";
 export default function ProductCard({ product,
   onEdit,
-  onDelete }) {
+  onDelete, }) {
   const { title, price, description, category, image, rating } = product;
   const stars = Math.round(rating?.rate || 0);
-
+  const isCartItem=false
   return (
     <div className="card">
       <div className="tilt">
@@ -39,7 +39,7 @@ export default function ProductCard({ product,
           </div>
 
           {!isAdmin && (
-            false ? (
+            isCartItem ? (
               <div className="qty-control">
                 <button
                   className="qty-btn"

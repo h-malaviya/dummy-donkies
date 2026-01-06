@@ -51,7 +51,7 @@ function NavBar() {
       <nav className="navbar">
         <div className="company-title">
           <button
-            className={`menu-btn ${getClassNames(isMenuOpen, "open", "", "")}`}
+            className={`menu-btn ${getClassNames(isMenuOpen, "open")}`}
             onClick={openMenu}
 
             aria-label="toggle menu"
@@ -94,11 +94,11 @@ function NavBar() {
       </nav>
 
       <div
-        className={`overlay ${getClassNames(isMenuOpen, "show", "")}`}
+        className={`overlay ${getClassNames(isMenuOpen, "show")}`}
         onClick={closeAll}
 
       />
-      <aside className={`sidebar ${getClassNames(isMenuOpen, "open", "")}`}>
+      <aside className={`sidebar ${getClassNames(isMenuOpen, "open")}`}>
         <button className="close-btn" onClick={closeAll}>
           ✕
         </button>
