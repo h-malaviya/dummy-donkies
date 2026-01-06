@@ -27,9 +27,6 @@ function NavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
 
-
-
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {

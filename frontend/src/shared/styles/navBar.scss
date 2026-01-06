@@ -10,7 +10,7 @@
   background: var(--bg-2);
   z-index: 1000;
   top: 0;
-
+  position: sticky;
   .company-title {
     display: flex;
     align-items: center;
