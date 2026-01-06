@@ -71,7 +71,7 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @include small {
     .nav-links {
       display: none;
     }

@@ -238,7 +238,7 @@
 }
 
 /* Tablet */
-@media (max-width: 768px) {
+@include tablet{
   .product-grid-section {
     padding: 32px 16px;
 
@@ -249,7 +249,7 @@
 }
 
 /* Mobile */
-@media (max-width: 480px) {
+@include small {
   .product-grid-section {
     .product-grid {
       gap: 20px;

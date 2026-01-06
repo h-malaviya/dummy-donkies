@@ -79,7 +79,7 @@
 }
 
 /* ================= MOBILE ================= */
-@media (max-width: 480px) {
+@include small {
   .cart-item {
     grid-template-columns: 50px 1fr auto;
     gap: 10px;
@@ -113,7 +113,7 @@
 }
 
 /* ================= SMALL TABLETS ================= */
-@media (max-width: 768px) {
+@include tablet {
   .cart-item {
     padding: 10px;
     gap: 10px;

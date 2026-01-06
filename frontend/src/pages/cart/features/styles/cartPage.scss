@@ -87,7 +87,7 @@
 
 /* ================= MOBILE ================= */
 
-@media (max-width: 900px) {
+@include tablet {
   .cart-page {
     grid-template-columns: 1fr;
   }
@@ -98,7 +98,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@include small {
   .cart-page {
     padding: 0px 24px;
   }

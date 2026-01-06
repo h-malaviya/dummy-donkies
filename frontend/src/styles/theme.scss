@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-
+$small: 480px;
+$mobile: 576px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1280px;
 $neon-cobalt: #00f2ff;    // Liquid cooling / Laser precision
 $palladium: #d4d4d8;      // Polished metal
 $deep-electric: #0062ff;  // Data flow blue
@@ -85,3 +89,35 @@ $light-quartz: #f1f5f9;
     --glass: blur(12px) saturate(180%) rgba(255, 255, 255, 0.7);
 }
 
+@mixin mobile {
+  @media (max-width: $tablet) {
+    @content;
+  }
+}
+
+// Tablet & below
+@mixin tablet {
+  @media (max-width: $laptop) {
+    @content;
+  }
+}
+
+// Laptop & up
+@mixin laptop {
+  @media (min-width: $laptop) {
+    @content;
+  }
+}
+
+// Desktop & up
+@mixin desktop {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin small{
+    @media (max-width:$small){
+        @content
+    }
+}

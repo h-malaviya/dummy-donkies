@@ -119,8 +119,7 @@
   }
 }
 
-/* MOBILE */
-@media (max-width: 480px) {
+@include small {
   .cart-popup {
     width: 100%;
   }

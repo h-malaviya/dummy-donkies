@@ -110,7 +110,7 @@
 }
 
 /* MOBILE */
-@media (max-width: 480px) {
+@include small {
   .profile-modal {
     width: calc(100% - 24px);
   }

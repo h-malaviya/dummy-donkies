@@ -63,7 +63,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@include small {
   .cart-item {
     grid-template-columns: 50px 1fr auto;
     grid-template-areas:
