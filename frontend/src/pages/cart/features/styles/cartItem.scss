@@ -1,0 +1,121 @@
+@use '../../../../styles/theme.scss' as *;
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--bg-3);
+  padding: 12px;
+  border-radius: 12px;
+
+  img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .info {
+    min-width: 0; 
+
+    h4 {
+      margin: 0 0 4px;
+      color: var(--text-1);
+      font-size: 14px;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      color: var(--text-2);
+      font-size: 13px;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+
+      button {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        background: var(--bg-1);
+        font-weight: 600;
+      }
+
+      span {
+        min-width: 20px;
+        text-align: center;
+        font-size: 13px;
+      }
+    }
+  }
+
+  .subtotal {
+    font-weight: 600;
+    color: var(--text-1);
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  .remove {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  .cart-item {
+    grid-template-columns: 50px 1fr auto;
+    gap: 10px;
+
+    /* SAME layout, just tighter spacing */
+    img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .info {
+      h4 {
+        font-size: 13px;
+      }
+
+      .qty-controls button {
+        width: 26px;
+        height: 26px;
+      }
+    }
+
+    .subtotal {
+      font-size: 13px;
+    }
+
+    .remove {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+/* ================= SMALL TABLETS ================= */
+@media (max-width: 768px) {
+  .cart-item {
+    padding: 10px;
+    gap: 10px;
+  }
+}
