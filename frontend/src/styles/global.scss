@@ -78,3 +78,12 @@ button{
   cursor: pointer;
    color: var(--text-1);
 }
+select {
+  background: var(--bg-3);
+  color: var(--text-1);
+  font-size: 12px;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}

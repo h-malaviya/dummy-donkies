@@ -17,17 +17,11 @@
 }
 
 select {
-  background: var(--bg-3);
-  color: var(--text-1);
   border: 1px solid rgba(255,255,255,0.12);
   padding: 8px 12px;
   border-radius: 10px;
-  font-size: 13px;
   min-width: 160px;
-  cursor: pointer;
-
   &:focus {
-    outline: none;
     border-color: var(--primary);
   }
 }
