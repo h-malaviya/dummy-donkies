@@ -97,10 +97,6 @@ export default function ProductGrid({ onEdit, onDelete,products = [], filters })
         ))}
 
       </div>
-
-      {/* PAGINATION */}
-
-
       <div className="pagination">
         <button
           className="nav"
