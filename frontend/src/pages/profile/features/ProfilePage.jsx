@@ -56,9 +56,12 @@ export default function ProfilePage() {
 
     const handleLogout = () => {
         const ok = window.confirm(
-            `Are you sure you want to delete ${u.username}? This action cannot be undone.`
+            `Are you want to logout?`
         );
         if (ok) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("authUser");
+            localStorage.removeItem("userRole");
             navigate(ROUTES.LOGIN, { replace: true });
         }
     };

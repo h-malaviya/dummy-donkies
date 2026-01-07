@@ -27,6 +27,8 @@ export default function useCrud(resourceKey, endpoint) {
     }
   }, [endpoint, resourceKey]);
 
+  
+
   // CREATE
   const createItem = async (payload) => {
     try {

@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import "../styles/searchBar.scss";
-
 export default function SearchBar({ onSearch }) {
-  const [query, setQuery] = useState("");
+  const [query,setQuery]=useState("")
+  
+  useEffect(() => {
+    const id = setTimeout(() => {
+      onSearch?.(query);
+    }, 500);
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-    onSearch?.(value);
-  };
+    return () => clearTimeout(id);
+  }, [query, onSearch]);
 
   return (
     <div className="search-bar">
@@ -24,7 +25,7 @@ export default function SearchBar({ onSearch }) {
         type="text"
         placeholder="Search products…"
         value={query}
-        onChange={handleChange}
+        onChange={(e)=>setQuery(e.target.value)}
       />
     </div>
   );

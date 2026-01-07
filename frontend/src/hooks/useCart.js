@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import api from "../services/axios";
 import { getStorage, setStorage } from "../shared/utils/storage";
 import { generateId } from "../shared/utils/generateId";
@@ -12,7 +12,7 @@ export default function useCarts() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const getUserSession = useCallback(() => {
     const local = getStorage(storageKey);
     if (local) {
       setCarts(local);
@@ -28,7 +28,12 @@ export default function useCarts() {
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     }
+  }, [])
+
+  useEffect(() => {
+   getUserSession()
   }, []);
+
 
   const createCart = async (cartData) => {
     try {

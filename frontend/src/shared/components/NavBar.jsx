@@ -8,11 +8,12 @@ import { useState, useEffect } from 'react'
 import { ROUTES } from '../../app/appConfig'
 import { getClassNames } from '../utils/global'
 import SearchBar from './SearchBar'
-import { isAdmin } from '../../app/appConfig'
+import useIsAdmin from '../../hooks/useIsAdmin'
 import { useNavigate } from 'react-router-dom'
 
-function NavBar() {
+function NavBar({onSearch}) {
   const naviageTo = useNavigate()
+  const isAdmin= useIsAdmin()
   const navLinks = isAdmin
     ? [
       { text: "Users", url: ROUTES.ADMIN_USERS },
@@ -71,7 +72,7 @@ function NavBar() {
           <ThemeButton className="theme-switch" />
         </div>}
         <div className="search-wrapper">
-          <SearchBar onSearch={(q) => console.log("Search:", q)} />
+          <SearchBar onSearch={onSearch}  />
         </div>
 
         <div className="logos">

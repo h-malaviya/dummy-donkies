@@ -22,28 +22,29 @@ export default function Login() {
     password: Yup.string().required("Password is required"),
     role: Yup.string().required("Please select a role"),
   });
-
   const handleSubmit = async (
-    values,
-    { setSubmitting, setFieldError }
-  ) => {
-    try {
-      console.log(values);
-      
-      const res = await login(values.username, values.password);
+  values,
+  { setSubmitting, setFieldError }
+) => {
+  const res = await login(
+    values.username,
+    values.password,
+    values.role
+  );
 
-      if (!res.success) {
-        setFieldError("error", "Invalid username or password");
-        return;
-      }
-      localStorage.setItem("userRole", values.role);
-      navigateTo(ROUTES.HOME);
-    } catch (err) {
-      setFieldError("error", "Server error. Try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  setSubmitting(false);
+
+  if (!res?.success) {
+    setFieldError("username", "Invalid credentials");
+    return;
+  }
+
+  if (res.role === "admin") {
+    navigateTo("/admin");
+  } else {
+    navigateTo(ROUTES.HOME);
+  }
+};
 
   return (
     <div className="auth-page">

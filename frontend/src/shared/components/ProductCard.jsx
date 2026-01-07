@@ -1,10 +1,11 @@
 import "../styles/productCard.scss";
-import { isAdmin } from "../../app/appConfig";
+import useIsAdmin from "../../hooks/useIsAdmin";
 export default function ProductCard({ product,
   onEdit,
   onDelete, }) {
   const { title, price, description, category, image, rating } = product;
   const stars = Math.round(rating?.rate || 0);
+  const isAdmin = useIsAdmin()
   const isCartItem=false
   return (
     <div className="card">
