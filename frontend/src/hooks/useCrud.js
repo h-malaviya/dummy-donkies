@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import api from "../services/axios";
 import { getStorage, setStorage } from "../shared/utils/storage";
 import { generateId } from "../utils/generateId";
-import { BACKEND_ENDPOINTS } from "../app/appConfig";
 export default function useCrud(resourceKey, endpoint) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);

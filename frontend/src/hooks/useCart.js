@@ -33,7 +33,7 @@ export default function useCarts() {
   const createCart = async (cartData) => {
     try {
       const res = await api.post(endpoint, cartData);
-      if (res.status >= 200 && res.status < 300) {
+      if (res.status ==201) {
         const newCart = {
           ...cartData,
           id: res.data.id ?? generateId(),
@@ -52,7 +52,7 @@ export default function useCarts() {
   const updateCart = async (id, updates) => {
     try {
       const res = await api.put(`${BACKEND_ENDPOINTS.CART}${id}`, updates);
-      if (res.status >= 200 && res.status < 300) {
+      if (res.status==200) {
         const updatedCarts = carts.map((c) =>
           c.id === id ? { ...c, ...updates } : c
         );
@@ -69,7 +69,7 @@ export default function useCarts() {
   const deleteCart = async (id) => {
     try {
       const res = await api.delete(`${BACKEND_ENDPOINTS.CART}${id}`);
-      if (res.status >= 200 && res.status < 300) {
+      if (res.status ==200) {
         const updated = carts.filter((c) => c.id !== id);
         setCarts(updated);
         setStorage(storageKey, updated);

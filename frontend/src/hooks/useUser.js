@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import api from "../services/axios";
 import { getStorage, setStorage } from "../shared/utils/storage";
 import { generateId } from "../shared/utils/generateId";
+import { BACKEND_ENDPOINTS } from "../app/appConfig";
 export default function useUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ export default function useUsers() {
       setUsers(local);
     } else {
       api
-        .get("/users")
+        .get(BACKEND_ENDPOINTS.USERS)
         .then((res) => {
           setUsers(res.data);
           setStorage("users", res.data);
@@ -24,9 +25,9 @@ export default function useUsers() {
 
   const signup = async (userData) => {
     try {
-      const res = await api.post("/users", userData);
+      const res = await api.post(BACKEND_ENDPOINTS.USERS, userData);
 
-      if (res.status >= 200 && res.status < 300) {
+      if (res.status == 201) {
         const newUser = {
           ...userData,
           id: res.data?.id ?? generateId(), 

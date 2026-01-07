@@ -33,7 +33,7 @@ export default function useProducts() {
   const createProduct = async (productData) => {
     try {
       const res = await api.post(endpoint, productData);
-      if (res.status >= 200 && res.status < 300) {
+      if (res.status == 201) {
         const newProduct = {
           ...productData,
           id: res.data.id ?? generateId(),
@@ -52,7 +52,7 @@ export default function useProducts() {
   const updateProduct = async (id, updates) => {
     try {
       const res = await api.put(`${BACKEND_ENDPOINTS.PRODUCT}${id}`, updates);
-      if (res.status >= 200 && res.status < 300) {
+      if (res.status == 200) {
         const updated = products.map((p) =>
           p.id === id ? { ...p, ...updates } : p
         );
@@ -69,7 +69,7 @@ export default function useProducts() {
   const deleteProduct = async (id) => {
     try {
       const res = await api.delete(`${BACKEND_ENDPOINTS.PRODUCT}${id}`);
-      if (res.status >= 200 && res.status < 300) {
+      if (res.status == 200) {
         const updated = products.filter((p) => p.id !== id);
         setProducts(updated);
         setStorage(storageKey, updated);
