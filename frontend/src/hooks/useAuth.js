@@ -84,5 +84,7 @@ export default function useAuth() {
     }
   };
 
+  
+
   return { user, token, error, login };
 }
