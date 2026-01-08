@@ -95,7 +95,7 @@ export default function ProductCard({ product,
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
             ))}
-            <span className="rcount">{rating.count} Reviews</span>
+            <span className="rcount">{rating?.count || ''} Reviews</span>
           </div>
 
           <div className="stock">In Stock</div>
@@ -103,8 +103,8 @@ export default function ProductCard({ product,
       </div>
       {isAdmin && (
         <div className="admin-actions">
-          <button onClick={() => onEdit(product)}>Edit</button>
-          <button onClick={() => onDelete(product.id)}>Delete</button>
+          <button onClick={() => onEdit?.(product)}>Edit</button>
+          <button onClick={() => onDelete?.(product.id)}>Delete</button>
         </div>
       )}
     </div>

@@ -1,16 +1,16 @@
 @use "../../../../styles/theme.scss" as *;
 
 .admin-users-page {
-  padding:  24px 32px; 
+  padding: 24px 32px;
   background: var(--bg-3);
   min-height: 100vh;
 
   h2 {
     margin-bottom: 20px;
-    
     font-weight: 700;
   }
 }
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -27,91 +27,91 @@
   }
 }
 
+/* ================= Table ================= */
 .admin-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 12px;
 
-  thead {
-    th {
-      text-align: left;
-      
-      font-weight: 600;
-      color: var(--text-2);
-      padding: 12px 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+  thead th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  tbody tr {
+    background: var(--bg-2);
+    border-radius: 14px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: translateY(-3px);
     }
   }
 
-  tbody {
-    tr {
-      background: var(--bg-2);
-      border-radius: 14px;
-      box-shadow: var(--card-shadow);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+  tbody td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--text-1);
+    vertical-align: middle;
 
-      &:hover {
-        transform: translateY(-3px);
-      }
+    &:first-child {
+      border-radius: 14px 0 0 14px;
+    }
 
-      td {
-        padding: 14px 16px;
-        font-size: 14px;
-        color: var(--text-1);
-        vertical-align: middle;
-
-        &:first-child {
-          border-radius: 14px 0 0 14px;
-        }
-
-        &:last-child {
-          border-radius: 0 14px 14px 0;
-          text-align: right;
-          white-space: nowrap;
-        }
-
-        small {
-          display: block;
-          font-size: 12px;
-          color: var(--text-2);
-          margin-top: 2px;
-        }
-      }
+    &:last-child {
+      border-radius: 0 14px 14px 0;
+      text-align: right;
+      white-space: nowrap;
     }
   }
 }
+
+/* ================= Actions ================= */
 .admin-actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   justify-content: flex-end;
 
   button {
-    padding: 6px 12px;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.25s ease;
-  }
+    width: 36px;
+    height: 36px;
+    padding: 0;
 
-  .edit {
-    background: var(--bg-2);
-    color: var(--button-text-2);
-
-    &:hover {
-      background: var(--bg-3);
-    }
-  }
-
-  .delete {
+    border: none;
+    border-radius: 10px;
     background: transparent;
-    color: var(--delete-text);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.15s ease, background 0.2s ease;
 
     &:hover {
-      background: rgba(239, 68, 68, 0.15);
+      transform: scale(1.05);
     }
+  }
+
+  .delete:hover {
+    background: rgba(239, 68, 68, 0.15);
   }
 }
+
+/* ================= Icons ================= */
+.admin-icons {
+  width: 18px;
+  height: 18px;
+  display: block;
+  object-fit: contain;
+}
+
+/* ================= Empty ================= */
 .admin-empty {
   text-align: center;
   padding: 80px 0;
@@ -119,33 +119,27 @@
   font-size: 14px;
 }
 
-@include tablet {
+/* ================= Mobile ================= */
+@include small {
   .admin-users-page {
     padding: 88px 16px 24px;
   }
 
   .admin-table {
-    border-spacing: 0 16px;
-
     thead {
       display: none;
     }
 
     tbody tr {
       display: block;
-      background: var(--bg-2);
       padding: 16px;
       border-radius: 14px;
-      box-shadow: var(--card-shadow);
     }
 
     tbody td {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       padding: 6px 0;
-      font-size: 14px;
-      border-radius: 0;
 
       &::before {
         content: attr(data-label);
@@ -163,11 +157,14 @@
   }
 
   .admin-actions {
-    width: 100%;
-    justify-content: flex-end;
-
     button {
-      flex: 1;
+      width: 44px;
+      height: 44px;
     }
+  }
+
+  .admin-icons {
+    width: 22px;
+    height: 22px;
   }
 }

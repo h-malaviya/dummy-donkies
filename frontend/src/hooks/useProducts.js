@@ -36,7 +36,7 @@ export default function useProducts() {
       if (res.status == 201) {
         const newProduct = {
           ...productData,
-          id: res.data.id ?? generateId(),
+          id:  generateId(),
         };
         const updated = [newProduct, ...products];
         setProducts(updated);

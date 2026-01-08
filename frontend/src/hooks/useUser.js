@@ -30,7 +30,7 @@ export default function useUsers() {
       if (res.status == 201) {
         const newUser = {
           ...userData,
-          id: res.data?.id ?? generateId(), 
+          id: generateId(),
         };
 
         const updated = [newUser, ...users];
@@ -45,5 +45,62 @@ export default function useUsers() {
     }
   };
 
-  return { users, loading, error, signup };
+  const updateUser = async (id, updatedData) => {
+    try {
+      const res = await api.put(`${BACKEND_ENDPOINTS.USER}${id}`, updatedData);
+
+      if (res.status === 200) {
+        const updatedUsers = users.map((u) =>
+          u.id === id ? { ...u, ...updatedData } : u
+        );
+
+        setUsers(updatedUsers);
+        setStorage("users", updatedUsers);
+
+        return { success: true };
+      }
+    } catch (err) {
+      setError(err);
+      return { success: false, error: err };
+    }
+  };
+
+  const deleteUser = async (id) => {
+    try {
+      const res = await api.delete(`${BACKEND_ENDPOINTS.USER}${id}`);
+
+      if (res.status === 200) {
+        const updatedUsers = users.filter((u) => u.id !== id);
+
+        setUsers(updatedUsers);
+        setStorage("users", updatedUsers);
+
+        return { success: true };
+      }
+    } catch (err) {
+      setError(err);
+      return { success: false, error: err };
+    }
+  };
+  const getUser = async (id)=>{
+    try {
+      const res = api.get(`${BACKEND_ENDPOINTS.USER}${id}`)
+      return {
+        success :true,res
+      }
+      
+    } catch (err) {
+      return { success: false, error: err };
+    }
+  }
+
+  return {
+    users,
+    loading,
+    error,
+    signup,
+    updateUser,
+    deleteUser,
+    getUser
+  };
 }
