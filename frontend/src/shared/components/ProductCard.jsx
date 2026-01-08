@@ -1,12 +1,16 @@
 import "../styles/productCard.scss";
 import useIsAdmin from "../../hooks/useIsAdmin";
+import { useCart } from "../../app/CartContext";
 export default function ProductCard({ product,
   onEdit,
   onDelete, }) {
   const { title, price, description, category, image, rating } = product;
+  const { cart, addToCart, decreaseQty } = useCart();
   const stars = Math.round(rating?.rate || 0);
   const isAdmin = useIsAdmin()
-  const isCartItem=false
+  const cartItem = cart?.products.find(
+    p => p.productId === product.id
+  );
   return (
     <div className="card">
       <div className="tilt">
@@ -40,20 +44,20 @@ export default function ProductCard({ product,
           </div>
 
           {!isAdmin && (
-            isCartItem ? (
+            cartItem ? (
               <div className="qty-control">
                 <button
                   className="qty-btn"
-                 
+                 onClick={() => decreaseQty(product.id)}
                 >
                   −
                 </button>
 
-                <span className="qty">1</span>
+                <span className="qty">{cartItem.quantity}</span>
 
                 <button
                   className="qty-btn"
-                  
+                  onClick={() => addToCart(product.id)}
                 >
                   +
                 </button>
@@ -61,7 +65,7 @@ export default function ProductCard({ product,
             ) : (
               <button
                 className="btn"
-                
+                onClick={() => addToCart(product.id)}
               >
                 <span>Add to Cart</span>
                 <svg
@@ -95,7 +99,7 @@ export default function ProductCard({ product,
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
             ))}
-            <span className="rcount">{rating.count} Reviews</span>
+            <span className="rcount">{rating?.count || 0} Reviews</span>
           </div>
 
           <div className="stock">In Stock</div>
@@ -103,8 +107,8 @@ export default function ProductCard({ product,
       </div>
       {isAdmin && (
         <div className="admin-actions">
-          <button onClick={() => onEdit(product)}>Edit</button>
-          <button onClick={() => onDelete(product.id)}>Delete</button>
+          <button onClick={() => onEdit?.(product)}>Edit</button>
+          <button onClick={() => onDelete?.(product.id)}>Delete</button>
         </div>
       )}
     </div>

@@ -1,60 +1,79 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import ProductGrid from "../../../shared/components/ProductGrid";
 import ProductEditorModal from "./ProductEditorModal";
-
-const tmp_products = [
-    {
-        "id": 1,
-        "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-        "price": 109.95,
-        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-        "category": "men's clothing",
-        "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
-        "rating": {
-            "rate": 3.9,
-            "count": 120
-        }
-    },
-    
-]
+import useProducts from "../../../hooks/useProducts";
+import { useOutletContext } from "react-router-dom";
+import Loading from "../../../shared/components/Loading";
+import './styles/adminProducts.scss'
+const EMPTY_PRODUCT = {
+    title: "",
+    price: 0,
+    description: "",
+    category: "",
+};
 export default function AdminProducts() {
-    const [products, setProducts] = useState(tmp_products);
+
     const [editingProduct, setEditingProduct] = useState(null);
-
-    const handleDelete = (id) => {
-
-        const ok = window.confirm(
-            `Are you sure you want to delete this product?`
-        );
+    const { products, loading, error, deleteProduct, updateProduct, createProduct } = useProducts();
+    const { search } = useOutletContext();
+    const handleDelete = async (id) => {
+        const ok = window.confirm("Are you sure you want to delete this product?");
         if (ok) {
-            setProducts(prev => prev.filter(p => p.id !== id));
+            try {
+                await deleteProduct(id);
+            } catch (error) {
+                console.error("Error in product deletion");
+
+            }
         }
     };
+    const handleSave = async (updated) => {
+        await updateProduct(updated.id, updated);
+        setEditingProduct(null);
+    };
+    const handleAdd = async(productData) => {
+        await createProduct(productData);
+        setEditingProduct(null);
+    }
+    const filteredProducts = useMemo(() => {
+        if (!search.trim()) return products;
 
+        const q = search.toLowerCase();
+        return products.filter(
+            (p) =>
+                p.title.toLowerCase().includes(q) ||
+                p.description?.toLowerCase().includes(q) ||
+                p.category?.toLowerCase().includes(q)
+        );
+    }, [products, search]);
 
-const handleSave = (updated) => {
-    setProducts(prev =>
-        prev.map(p => (p.id === updated.id ? updated : p))
-    );
-    setEditingProduct(null);
-};
-
-return (
-    <>
-        <ProductGrid
-            products={products}
-            isAdmin
-            onEdit={setEditingProduct}
-            onDelete={handleDelete}
-        />
-
-        {editingProduct && (
-            <ProductEditorModal
-                product={editingProduct}
-                onSave={handleSave}
-                onClose={() => setEditingProduct(null)}
+    if (loading) return <Loading />;
+    if (error) return <p>Error loading products</p>;
+    return (
+        <>
+            <div className="admin-products-header">
+                <h2>Products</h2>
+                <button
+                    className="add-product-btn"
+                    onClick={() => setEditingProduct(EMPTY_PRODUCT)}
+                >
+                    + Add Product
+                </button>
+            </div>
+            <ProductGrid
+                products={filteredProducts}
+                onEdit={setEditingProduct}
+                onDelete={handleDelete}
             />
-        )}
-    </>
-);
+
+            {editingProduct && (
+                <ProductEditorModal
+                    product={editingProduct}
+                    onSave={handleSave}
+                    onClose={() => setEditingProduct(null)}
+                    onAdd={handleAdd}
+                />
+            )}
+        </>
+    );
 }

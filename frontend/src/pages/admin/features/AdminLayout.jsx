@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import NavBar from "../../../shared/components/NavBar";
 import { Outlet } from "react-router-dom";
 
 export default function AdminLayout() {
-
+  const [search, setSearch] = useState("");
   return (
     <>
-      <NavBar />
+      <NavBar onSearch={setSearch}/>
       <main >
-        <Outlet />
+        <Outlet context={{ search }}/>
       </main>
     </>
   );

@@ -1,6 +1,6 @@
 import { useState ,useEffect} from "react";
 import "../styles/searchBar.scss";
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch,placeholder="Search" }) {
   const [query,setQuery]=useState("")
   
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function SearchBar({ onSearch }) {
 
       <input
         type="text"
-        placeholder="Search products…"
+        placeholder={placeholder}
         value={query}
         onChange={(e)=>setQuery(e.target.value)}
       />

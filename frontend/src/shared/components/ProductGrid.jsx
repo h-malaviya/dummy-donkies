@@ -39,7 +39,7 @@ function getPaginationPages(page, totalPages) {
   );
 }
 
-export default function ProductGrid({ onEdit, onDelete, products = [], filters }) {
+export default function ProductGrid({ onEdit=()=>{}, onDelete=()=>{}, products = [] }) {
   const [page, setPage] = useState(1);
    
   const totalPages = Math.ceil(products.length / PER_PAGE);

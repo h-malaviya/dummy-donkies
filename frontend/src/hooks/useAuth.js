@@ -1,52 +1,82 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import api from "../services/axios";
 import { setStorage, getStorage } from "../shared/utils/storage";
 import { BACKEND_ENDPOINTS } from "../app/appConfig";
 
 export default function useAuth() {
-  const [user, setUser] = useState(getStorage("authUser") || null);
-  const [token, setToken] = useState(getStorage("token") || null);
+  const [user, setUser] = useState(getStorage("authUser"));
+  const [token, setToken] = useState(getStorage("token"));
   const [error, setError] = useState(null);
-
+  useEffect(() => {
+    const local = getStorage("users");
+    if (local) {
+      setUser(local);
+    } else {
+      api
+        .get(BACKEND_ENDPOINTS.USERS)
+        .then((res) => {
+          setUser(res.data);
+          setStorage("users", res.data);
+        })
+        .catch((err) => setError(err));
+    }
+  }, []);
   const login = async (username, password, roleFromUI) => {
     try {
       const res = await api.post(BACKEND_ENDPOINTS.LOGIN, {
         username,
         password,
       });
-
-      if (res.status === 201) {
-        const role = res.data.role || roleFromUI || "user";
-
+      
+      if (res.status == 201) {
+        
+        const users = getStorage("users") || [];
+        const matchedUser = users.find(u => u.username == username);
+        console.log("matched : ",matchedUser);
+        
+        if (!matchedUser) {
+          throw new Error("User not found in local storage");
+        }
+        const authUser = {
+          id: matchedUser.id,
+          username: matchedUser.username,
+          role:roleFromUI,
+        };
+        setStorage("userRole", authUser.role);
+        console.log(authUser);
+        
         setStorage("token", res.data.token);
-        setStorage("authUser", { username });
-        setStorage("userRole", role);
-
+        setStorage("authUser", authUser);
         setToken(res.data.token);
-        setUser({ username });
+        setUser(authUser);
         setError(null);
-
-        return { success: true, role };
+        return { success: true, roleFromUI };
       }
     } catch (err) {
-      const localUsers = getStorage("users") || [];
-
-      const matchedUser = localUsers.find(
-        (u) => u.username === username && u.password === password
+      const users = getStorage("users") || [];
+      const matchedUser = users.find(
+        u => u.username === username && u.password === password
       );
 
       if (matchedUser) {
         const mockToken = "local-session-" + btoa(username);
 
+        const authUser = {
+          id: matchedUser.id,
+          username: matchedUser.username,
+          role: roleFromUI,
+        };
+        
+        setStorage("userRole", authUser.role);
         setStorage("token", mockToken);
-        setStorage("authUser", { username });
-        setStorage("userRole", matchedUser.role);
+        setStorage("authUser", authUser);
+     
 
         setToken(mockToken);
-        setUser({ username });
+        setUser(authUser);
         setError(null);
 
-        return { success: true, role: matchedUser.role };
+        return { success: true, role: authUser.role };
       }
 
       setError("Invalid credentials");
