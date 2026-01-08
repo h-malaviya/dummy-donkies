@@ -87,7 +87,7 @@ export default function AdminUsers() {
                 </tbody>
             </table>
             <div
-                className={`overlay ${getClassNames(selectedUser, "show", "")}`}
+                className={`overlay ${getClassNames(selectedUser, "show")}`}
                 onClick={() => setSelectedUser(null)}
             />
             {selectedUser && (
