@@ -4,8 +4,8 @@ import "./login.scss";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../app/appConfig";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import useAuth from "../../../hooks/useAuth";
+import { loginValidationSchema } from "../../../shared/utils/schema";
 import { useState } from "react";
 export default function Login() {
   const navigateTo = useNavigate();
@@ -17,31 +17,27 @@ export default function Login() {
     role: "user",
   };
 
-  const loginValidationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    password: Yup.string().required("Password is required"),
-    role: Yup.string().required("Please select a role"),
-  });
-
   const handleSubmit = async (
     values,
     { setSubmitting, setFieldError }
   ) => {
-    try {
-      console.log(values);
-      
-      const res = await login(values.username, values.password);
+    const res = await login(
+      values.username,
+      values.password,
+      values.role
+    );
 
-      if (!res.success) {
-        setFieldError("error", "Invalid username or password");
-        return;
-      }
-      localStorage.setItem("userRole", values.role);
+    setSubmitting(false);
+
+    if (!res?.success) {
+      setFieldError("error", "Invalid credentials");
+      return;
+    }
+
+    if (res.role === "admin") {
+      navigateTo("/admin");
+    } else {
       navigateTo(ROUTES.HOME);
-    } catch (err) {
-      setFieldError("error", "Server error. Try again.");
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -52,6 +48,7 @@ export default function Login() {
           Welcome to <span>Dummy Donkies</span>
         </h3>
         <p>Login to continue</p>
+
 
         <Formik
           initialValues={initialValues}
@@ -103,7 +100,7 @@ export default function Login() {
                   {formik.errors.password}
                 </div>
               )}
-             <div className="role-selection">
+              <div className="role-selection">
                 <label className="role-label">Login as:</label>
                 <div className="radio-group">
                   <label>
@@ -146,4 +143,5 @@ export default function Login() {
       </div>
     </div>
   );
+
 }

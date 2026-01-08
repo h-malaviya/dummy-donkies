@@ -1,0 +1,31 @@
+// Variables for easy adjustments
+$loader-size: 80px;
+$overlay-bg: rgba(77, 77, 77, 0.26);
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $overlay-bg;
+  z-index: 9999;
+
+  &__image {
+    width: $loader-size;
+    height: auto;
+    object-fit: contain;
+  }
+
+  &__text {
+    margin-top: 1rem;
+    font-family: sans-serif;
+    color: #555;
+    font-weight: 500;
+  }
+}

@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./styles/filterBar.scss";
 
 const SORT_OPTIONS = [
@@ -26,12 +26,9 @@ export default function FilterBar({ products = [], onChange }) {
   ];
 
   useEffect(() => {
-    onChange({
-      category,
-      rating,
-      sort
-    });
-  }, [category, rating, sort]);
+    onChange({ category, rating, sort });
+  }, [category, rating, sort, onChange]);
+
 
   return (
     <section className="filter-bar">

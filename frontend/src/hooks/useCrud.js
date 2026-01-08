@@ -27,12 +27,14 @@ export default function useCrud(resourceKey, endpoint) {
     }
   }, [endpoint, resourceKey]);
 
+  
+
   // CREATE
   const createItem = async (payload) => {
     try {
       const res = await api.post(endpoint, payload);
 
-      if (res.status === 201 || res.status === 200) {
+      if (res.status === 201 ) {
         const newItem = {
           ...payload,
           id: res.data?.id ?? generateId(), // fallback
