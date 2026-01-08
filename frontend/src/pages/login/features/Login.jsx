@@ -4,8 +4,8 @@ import "./login.scss";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../app/appConfig";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import useAuth from "../../../hooks/useAuth";
+import { loginValidationSchema } from "../../../shared/utils/schema";
 import { useState } from "react";
 export default function Login() {
   const navigateTo = useNavigate();
@@ -17,34 +17,29 @@ export default function Login() {
     role: "user",
   };
 
-  const loginValidationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    password: Yup.string().required("Password is required"),
-    role: Yup.string().required("Please select a role"),
-  });
   const handleSubmit = async (
-  values,
-  { setSubmitting, setFieldError }
-) => {
-  const res = await login(
-    values.username,
-    values.password,
-    values.role
-  );
+    values,
+    { setSubmitting, setFieldError }
+  ) => {
+    const res = await login(
+      values.username,
+      values.password,
+      values.role
+    );
 
-  setSubmitting(false);
+    setSubmitting(false);
 
-  if (!res?.success) {
-    setFieldError("username", "Invalid credentials");
-    return;
-  }
+    if (!res?.success) {
+      setFieldError("error", "Invalid credentials");
+      return;
+    }
 
-  if (res.role === "admin") {
-    navigateTo("/admin");
-  } else {
-    navigateTo(ROUTES.HOME);
-  }
-};
+    if (res.role === "admin") {
+      navigateTo("/admin");
+    } else {
+      navigateTo(ROUTES.HOME);
+    }
+  };
 
   return (
     <div className="auth-page">
@@ -54,7 +49,7 @@ export default function Login() {
         </h3>
         <p>Login to continue</p>
 
-        
+
         <Formik
           initialValues={initialValues}
           validationSchema={loginValidationSchema}
@@ -105,7 +100,7 @@ export default function Login() {
                   {formik.errors.password}
                 </div>
               )}
-             <div className="role-selection">
+              <div className="role-selection">
                 <label className="role-label">Login as:</label>
                 <div className="radio-group">
                   <label>
@@ -139,7 +134,6 @@ export default function Login() {
               </Button>
             </Form>
           )}
- 
         </Formik>
 
         <p className="switch">
